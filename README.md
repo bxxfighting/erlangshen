@@ -7,3 +7,4 @@
 2. 暂时只用于本地记录，后续上传数据到服务器
 
 ** 参考学习资料: https://reactnative.cn/docs/0.51/getting-started.html
+** 跳转参考资料: https://reactnavigation.org/docs/getting-started.html
