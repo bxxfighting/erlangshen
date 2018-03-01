@@ -49,18 +49,24 @@ class AddAccountItemScreen extends Component {
                 }}
             >
                 <TextInput
-                    style={{height: 25}}
+                    style={{height: 25, width: 120, borderColor: 'gray', borderWidth: 1}}
                     placeholder="平台"
+                    autoCapitalize='none'
+                    keyboardType='default'
                     onChangeText={(text) => this.setState({platform: text})}
                 />
                 <TextInput
-                    style={{height: 25}}
+                    style={{height: 25, width: 120, borderColor: 'gray', borderWidth: 1}}
                     placeholder="账号"
+                    autoCapitalize='none'
+                    keyboardType='default'
                     onChangeText={(text) => this.setState({username: text})}
                 />
                 <TextInput
-                    style={{height: 25}}
+                    style={{height: 25, width: 120, borderColor: 'gray', borderWidth: 1}}
                     placeholder="密码"
+                    autoCapitalize='none'
+                    keyboardType='default'
                     onChangeText={(text) => this.setState({password: text})}
                 />
                 <Button
@@ -83,7 +89,6 @@ class AccountItemsScreen extends Component {
             'key': '',
         };
     }
-
 
     static navigationOptions = {
         headerRight: (
