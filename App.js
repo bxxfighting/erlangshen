@@ -1,15 +1,44 @@
 import React, {Component} from 'react';
-import {Alert, Button, Text, TextInput, View} from 'react-native';
+import {FlatList, ListView, Alert, Button, Text, TextInput, View} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 
 
 class AccountItemsScreen extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            'account_list': [],
+        };
+    }
+    getAccountList() {
+        fetch('http://www.buxingxing.com/erlangshen/account/list/')
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                this.setState({
+                    account_list: responseJson.data.account_list,
+                })
+            })
+    }
+    componentWillMount() {
+        this.getAccountList();
+    }
     render() {
         const {params} = this.props.navigation.state;
         const key = params ? params.key : '';
         return (
-            <View>
-                <Text>key: {JSON.stringify(key)}</Text>
+            <View
+                style={{
+                    flex:1,
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}
+            >
+                <FlatList
+                    data={this.state.account_list}
+                    renderItem={({item})=><Text>{item.password}</Text>}
+                />
             </View>
         );
     }
@@ -20,11 +49,12 @@ class KeyInputScreen extends Component {
         super(props);
         this.state = {
             'key': '',
+            'account_list': [],
         };
     }
     render() {
         return (
-            <View 
+            <View
                 style={{
                     flex:1,
                     flexDirection: 'column',
