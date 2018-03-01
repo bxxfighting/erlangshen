@@ -27,19 +27,23 @@ class AccountItemsScreen extends Component {
         const {params} = this.props.navigation.state;
         const key = params ? params.key : '';
         return (
-            <View
-                style={{
-                    flex:1,
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}
-            >
                 <FlatList
                     data={this.state.account_list}
-                    renderItem={({item})=><Text>{item.password}</Text>}
+                    renderItem={({item}) =>
+                        <View
+                            style={{
+                                flex:1,
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                alignItems: 'center'
+                            }}
+                        >
+                            <Text>{item.platform}</Text>
+                            <Text>{item.username}</Text>
+                            <Text>{item.password}</Text>
+                        </View>
+                    }
                 />
-            </View>
         );
     }
 }
