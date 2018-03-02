@@ -4,6 +4,54 @@ import {StackNavigator} from 'react-navigation';
 
 var CryptoJS = require("crypto-js")
 
+
+class LoginScreen extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            'username': '',
+            'password': '',
+        };
+    }
+    login() {
+    }
+
+    render() {
+        return (
+            <View
+                style={{
+                    flex:1,
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}
+            >
+                <TextInput
+                    style={{height: 25, width: 120, borderColor: 'gray', borderWidth: 1}}
+                    placeholder="账号"
+                    autoCapitalize='none'
+                    keyboardType='default'
+                    onChangeText={(text) => this.setState({username: text})}
+                />
+                <TextInput
+                    style={{height: 25, width: 120, borderColor: 'gray', borderWidth: 1}}
+                    placeholder="密码"
+                    autoCapitalize='none'
+                    keyboardType='default'
+                    onChangeText={(text) => this.setState({password: text})}
+                />
+                <Button
+                    title="登录"
+                    onPress={() => {
+                        this.props.navigation.navigate('KeyInput');
+                    }}
+                />
+            </View>
+        );
+    }
+}
+
+
 class AddAccountItemScreen extends Component {
     constructor(props) {
         super(props);
@@ -218,6 +266,9 @@ class KeyInputScreen extends Component {
 
 const RootStack = StackNavigator (
     {
+        Login: {
+            screen: LoginScreen,
+        },
         KeyInput: {
             screen: KeyInputScreen,
         },
@@ -229,7 +280,7 @@ const RootStack = StackNavigator (
         },
     },
     {
-        initialRouteName: 'KeyInput',
+        initialRouteName: 'Login',
     },
 );
 
