@@ -11,9 +11,29 @@ class LoginScreen extends Component {
         this.state = {
             'username': '',
             'password': '',
+            'signture': '',
         };
     }
+
     login() {
+        fetch('http://www.buxingxing.com/login/', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            'body': JSON.stringify({
+                username: this.state.username,
+                password: this.state.password,
+            })
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            this.setState({
+                signture: responseJson.data.errmsg,
+            });
+            Alert.alert(this.state.errmsg);
+        })
     }
 
     render() {
@@ -43,6 +63,7 @@ class LoginScreen extends Component {
                 <Button
                     title="登录"
                     onPress={() => {
+                        this.login();
                         this.props.navigation.navigate('KeyInput');
                     }}
                 />
