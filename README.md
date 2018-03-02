@@ -8,3 +8,10 @@
 
 ** 参考学习资料: https://reactnative.cn/docs/0.51/getting-started.html
 ** 跳转参考资料: https://reactnavigation.org/docs/getting-started.html
+
+配置说明:
+1. git clone https://github.com/bxxfighting/erlangshen.git
+2. npm install -g yarn react-native-cli
+3. npm install
+
+** 具体看https://reactnative.cn/docs/0.51/getting-started.html，我也是看这个做的
