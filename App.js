@@ -16,7 +16,15 @@ class LoginScreen extends Component {
     }
 
     login() {
-        fetch('http://www.buxingxing.com/login/', {
+        if (this.state.username == '') {
+            Alert.alert('账号', '请输入账号');
+            return;
+        }
+        if (this.state.password == '') {
+            Alert.alert('账号', '请输入密码');
+            return;
+        }
+        fetch('http://buxingxing.com/account/login/', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -25,14 +33,20 @@ class LoginScreen extends Component {
             'body': JSON.stringify({
                 username: this.state.username,
                 password: this.state.password,
+                platform_sign: 'erlangshen',
             })
         })
         .then((response) => response.json())
         .then((responseJson) => {
+            if (responseJson.errno != 0) {
+                Alert.alert('账号', '账号或者密码不正确');
+                return;
+            }
             this.setState({
-                signture: responseJson.data.errmsg,
+                signture: responseJson.data.signture,
             });
-            Alert.alert(this.state.errmsg);
+            Alert.alert(this.state.signture);
+            this.props.navigation.navigate('KeyInput');
         })
     }
 
@@ -64,7 +78,6 @@ class LoginScreen extends Component {
                     title="登录"
                     onPress={() => {
                         this.login();
-                        this.props.navigation.navigate('KeyInput');
                     }}
                 />
             </View>
@@ -90,6 +103,7 @@ class AddAccountItemScreen extends Component {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'BUNNY': 'erlangshen:2:1esjEw:v-ZjjgTJQ8eboy1rcHp9iNW23gw',//this.state.signture,
             },
             'body': JSON.stringify({
                 platform: CryptoJS.AES.encrypt(this.state.platform, this.state.key).toString(),
@@ -174,7 +188,12 @@ class AccountItemsScreen extends Component {
 
     getAccountList() {
         var account_list = [];
-        fetch('http://www.buxingxing.com/erlangshen/account/')
+        fetch('http://www.buxingxing.com/erlangshen/account/', {
+            method: 'GET',
+            headers: {
+                'BUNNY': 'erlangshen:2:1esjEw:v-ZjjgTJQ8eboy1rcHp9iNW23gw',//this.state.signture,
+            },
+        })
             .then((response) => response.json())
             .then((responseJson) => {
                 for (let account of responseJson.data.account_list) {
