@@ -61,14 +61,14 @@ class LoginScreen extends Component {
                 }}
             >
                 <TextInput
-                    style={{height: 25, width: 120, borderColor: 'gray', borderWidth: 1}}
+                    style={{height: 45, width: 220}}
                     placeholder="账号"
                     autoCapitalize='none'
                     keyboardType='default'
                     onChangeText={(text) => this.setState({username: text})}
                 />
                 <TextInput
-                    style={{height: 25, width: 120, borderColor: 'gray', borderWidth: 1}}
+                    style={{height: 45, width: 220}}
                     placeholder="密码"
                     autoCapitalize='none'
                     keyboardType='default'
@@ -277,15 +277,12 @@ class KeyInputScreen extends Component {
                     alignItems: 'center'
                 }}
             >
-                <Text>请输入密钥</Text>
                 <TextInput
                     style={{
-                        width: 120,
-                        height: 25,
-                        borderColor: 'gray',
-                        borderWidth: 1,
+                        width: 220,
+                        height: 45,
                         margin: 3
-                    }} placeholder="密钥"
+                    }} placeholder="请输入密钥"
                     onChangeText={(text) => this.setState({key: text})}
                 />
                 <Button title="进入"
